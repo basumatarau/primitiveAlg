@@ -309,16 +309,16 @@ public class SortingTrash {
     }
 
     public int[] recursiveQSort(){
-        recQsort(array, 0, array.length - 1);
+        recQSort(array, 0, array.length - 1);
 
         return array;
     }
 
-    private void recQsort(int[] array, int l, int r) {
+    private void recQSort(int[] array, int l, int r) {
         if(l<r){
             int pivotInd = partition3(array, l, r);
-            recQsort(array, l, pivotInd-1);
-            recQsort(array, pivotInd+1, r);
+            recQSort(array, l, pivotInd-1);
+            recQSort(array, pivotInd+1, r);
         }
     }
 

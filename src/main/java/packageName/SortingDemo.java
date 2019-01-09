@@ -239,7 +239,7 @@ public class SortingDemo {
             Integer right = stack.pop();
             Integer left = stack.pop();
             if (left < right) {
-                int pivotInd = partition(array, left, right);
+                int pivotInd = partition2(array, left, right);
 
                 stack.push(left);
                 stack.push(pivotInd - 1);
@@ -247,6 +247,40 @@ public class SortingDemo {
                 stack.push(right);
             }
         }
+    }
+
+    private static <T extends Comparable<T>> int partition2(T[] array, int left, int right) {
+
+        T pivot = array[right];
+        int leftPtr = left - 1;
+        int rightPtr = right + 1;
+
+        while (true) {
+
+            while (leftPtr < right) {
+                if (array[++leftPtr].compareTo(pivot) > 0) {
+                    break;
+                }
+            }
+            while (rightPtr > left){
+                if (array[--rightPtr].compareTo(pivot) < 0){
+                    break;
+                }
+            }
+
+            if(leftPtr>=rightPtr){
+                break;
+            }else{
+                T tmp = array[rightPtr];
+                array[rightPtr] = array[leftPtr];
+                array[leftPtr] = tmp;
+            }
+        }
+
+        array[right] = array[leftPtr];
+        array[leftPtr] = pivot;
+
+        return leftPtr;
     }
 
     public static <T extends Comparable<T>> void iterativeShellSort(T[] array) {
