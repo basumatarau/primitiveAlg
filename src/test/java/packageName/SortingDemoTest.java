@@ -144,6 +144,22 @@ public class SortingDemoTest {
     }
 
     @Test
+    public void recurrentQuickSort2Test(){
+        shuffleTestData();
+        Integer[] fix = getTestArrayCopy();
+        Integer[] sorted = getTestArrayCopy();
+
+
+        Arrays.sort(fix);
+        recursiveQuickSort2(sorted);
+
+        System.out.println(Arrays.toString(fix));
+        System.out.println(Arrays.toString(sorted));
+
+        assertArrayEquals("fail: ", fix, sorted);
+    }
+
+    @Test
     public void iterativeQuickSortTest(){
         shuffleTestData();
         Integer[] fix = getTestArrayCopy();

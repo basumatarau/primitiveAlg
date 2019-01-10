@@ -283,6 +283,107 @@ public class SortingDemo {
         return leftPtr;
     }
 
+    public static <T extends Comparable<T>> void recursiveQuickSort2(T[] array){
+        recursiveQuickSort2(array, 0, array.length - 1);
+    }
+
+    private static <T extends Comparable<T>> void recursiveQuickSort2(T[] array, int left, int right) {
+        if(right - left + 1 > 3){
+            int pivotInd = partition3(array, left, right);
+            recursiveQuickSort2(array, left, pivotInd - 1);
+            recursiveQuickSort2(array, pivotInd + 1, right);
+        }else{
+            manualSort(array, left, right);
+        }
+    }
+
+    private static <T extends Comparable<T>> void manualSort(T[] array, int left, int right) {
+        int size = right - left + 1;
+
+        if (size <= 1){
+            return;
+        }else if (size == 2){
+            if (array[left].compareTo(array[right]) > 0){
+                T tmp = array[left];
+                array[left] = array[right];
+                array[right] = tmp;
+            }
+        }else {
+            if (array[left].compareTo(array[right - 1]) > 0){
+                T tmp = array[left];
+                array[left] = array[right - 1];
+                array[right - 1] = tmp;
+            }
+            if (array[left].compareTo(array[right]) > 0){
+                T tmp = array[left];
+                array[left] = array[right];
+                array[right] = tmp;
+            }
+            if(array[right - 1].compareTo(array[right]) > 0){
+                T tmp = array[right - 1];
+                array[right - 1] = array[right];
+                array[right] = tmp;
+            }
+        }
+    }
+
+    private static <T extends Comparable<T>> int partition3(T[] array, int left, int right) {
+        T pivot = selectMedianPivot(array, left, right);
+
+        int leftPtr = left;
+        int rightPtr = right - 1;
+
+        while (true){
+            while (array[++leftPtr].compareTo(pivot) < 0) {
+            }
+
+            while (array[--rightPtr].compareTo(pivot) > 0) {
+            }
+
+            if(leftPtr >= rightPtr){
+                break;
+            }else {
+                T tmp = array[leftPtr];
+                array[leftPtr] = array[rightPtr];
+                array[rightPtr] = tmp;
+            }
+        }
+        T tmp = array[leftPtr];
+        array[leftPtr] = array[right - 1];
+        array[right - 1] = tmp;
+
+        return leftPtr;
+    }
+
+    private static <T extends Comparable<T>> T selectMedianPivot(T[] array, int left, int right) {
+
+        int medianInd = (left + right) / 2;
+        T tmp;
+
+        if(array[left].compareTo(array[medianInd])>0){
+            tmp = array[left];
+            array[left] = array[medianInd];
+            array[medianInd] = tmp;
+        }
+        if(array[left].compareTo(array[right])>0){
+            tmp = array[left];
+            array[left] = array[right];
+            array[right] = tmp;
+        }
+        if(array[medianInd].compareTo(array[right])>0){
+            tmp = array[medianInd];
+            array[medianInd] = array[right];
+            array[right] = tmp;
+        }
+
+        tmp = array[medianInd];
+        array[medianInd] = array[right - 1];
+        array[right - 1] = tmp;
+
+        return array[right - 1];
+    }
+
+
     public static <T extends Comparable<T>> void iterativeShellSort(T[] array) {
         int h = 1;
         while (h <= array.length / 3) {
