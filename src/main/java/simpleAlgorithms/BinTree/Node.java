@@ -1,4 +1,4 @@
-package packageName.BinTree;
+package simpleAlgorithms.BinTree;
 
 class Node <T extends Comparable<T>>{
     private Node<T> left = null;

@@ -1,4 +1,4 @@
-package packageName;
+package simpleAlgorithms;
 
 public class HanoiTowers {
     static int nDiscs = 3;

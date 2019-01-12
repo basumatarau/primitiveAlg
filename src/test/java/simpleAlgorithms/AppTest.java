@@ -1,4 +1,4 @@
-package packageName;
+package simpleAlgorithms;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
-import static packageName.SortingTrash.shellSort2;
+import static simpleAlgorithms.SortingTrash.shellSort2;
 
 /**
  * Unit test for simple App.

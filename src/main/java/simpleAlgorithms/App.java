@@ -1,4 +1,4 @@
-package packageName;
+package simpleAlgorithms;
 
 /**
  * Hello world!

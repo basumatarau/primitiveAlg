@@ -1,4 +1,4 @@
-package packageName.BinTree;
+package simpleAlgorithms.BinTree;
 
 import java.util.Objects;
 

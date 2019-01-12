@@ -1,9 +1,9 @@
-package packageName;
+package simpleAlgorithms;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import packageName.BinTree.BinTree;
+import simpleAlgorithms.BinTree.BinTree;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;

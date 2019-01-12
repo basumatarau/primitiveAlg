@@ -1,4 +1,4 @@
-package packageName;
+package simpleAlgorithms;
 
 import org.junit.Test;
 
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Random;
 import static org.junit.Assert.assertArrayEquals;
 
-import static packageName.SortingDemo.*;
+import static simpleAlgorithms.SortingDemo.*;
 
 public class SortingDemoTest {
 

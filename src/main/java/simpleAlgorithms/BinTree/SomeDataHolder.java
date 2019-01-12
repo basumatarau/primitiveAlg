@@ -1,4 +1,4 @@
-package packageName.BinTree;
+package simpleAlgorithms.BinTree;
 
 public class SomeDataHolder implements Comparable<SomeDataHolder>{
     private int num;
