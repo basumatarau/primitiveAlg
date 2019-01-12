@@ -155,7 +155,7 @@ public class SortingDemoTest {
 
         System.out.println(Arrays.toString(fix));
         System.out.println(Arrays.toString(sorted));
-
+        
         assertArrayEquals("fail: ", fix, sorted);
     }
 
