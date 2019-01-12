@@ -64,11 +64,6 @@ public class BinTree<T extends Comparable<T>> {
                             parent.setRight(successor);
                         }
 
-                        successor.setLeft(current.getLeft());
-                        if(!Objects.equals(successor, current.getRight())) {
-                            successor.setRight(current.getRight());
-                        }
-
                     } else if (current.getLeft() == null && current.getRight() == null) {
                         if (Objects.equals(parent.getLeft(), current)) {
                             parent.setLeft(null);
@@ -93,14 +88,7 @@ public class BinTree<T extends Comparable<T>> {
                     }
                 } else {
                     if (current.getLeft() != null && current.getRight() != null) {
-                        Node<T> successor = getSuccessor(current);
-
-                        successor.setLeft(current.getLeft());
-                        if(!Objects.equals(successor, current.getRight())) {
-                            successor.setRight(current.getRight());
-                        }
-
-                        root = successor;
+                        root = getSuccessor(current);
                     } else if (current.getLeft() == null && current.getRight() == null) {
                         root = null;
                     } else {
@@ -129,11 +117,14 @@ public class BinTree<T extends Comparable<T>> {
             current = current.getLeft();
         }
 
+        current.setLeft(node.getLeft());
         if(!Objects.equals(node, parent)) {
             parent.setLeft(current.getRight());
+            current.setRight(node.getRight());
         }else{
             parent.setRight(current.getRight());
         }
+
         return current;
     }
 

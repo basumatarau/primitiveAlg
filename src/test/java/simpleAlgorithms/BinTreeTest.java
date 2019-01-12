@@ -70,26 +70,6 @@ public class BinTreeTest {
     }
 
     @Test
-    public void elementInsertionTest(){
-        BinTree<Integer> binTree = new BinTree<>();
-        List<Integer> list = new ArrayList<>(SIZE);
-
-        for (int i = 0; i < SIZE; i++) {
-            int randInt = random.nextInt(BOUND);
-            binTree.insert(randInt);
-            list.add(randInt);
-        }
-
-        BinTreeTest testCase = run();
-
-        binTree.displayTree();
-
-        for (Integer integer : list) {
-            testCase.include(integer.toString());
-        }
-    }
-
-    @Test
     public void initialTest(){
         BinTree<Integer> binTree = new BinTree<>();
         binTree.insert(1234);
@@ -110,6 +90,26 @@ public class BinTreeTest {
     }
 
     @Test
+    public void elementInsertionTest(){
+        BinTree<Integer> binTree = new BinTree<>();
+        List<Integer> list = new ArrayList<>(SIZE);
+
+        for (int i = 0; i < SIZE; i++) {
+            int randInt = random.nextInt(BOUND);
+            binTree.insert(randInt);
+            list.add(randInt);
+        }
+
+        BinTreeTest testCase = run();
+
+        binTree.displayTree();
+
+        for (Integer integer : list) {
+            testCase.include(integer.toString());
+        }
+    }
+
+    @Test
     public void elementDeletionTest(){
         BinTree<Integer> binTree = new BinTree<>();
         List<Integer> list = new ArrayList<>(SIZE);
@@ -124,10 +124,11 @@ public class BinTreeTest {
             binTree.delete(integer);
         }
 
+        BinTreeTest testCase = run();
         binTree.displayTree();
 
         for (Integer integer : list) {
-            run().exclude(integer.toString());
+            testCase.exclude(integer.toString());
         }
 
     }
