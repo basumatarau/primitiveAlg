@@ -1,18 +1,19 @@
 package simpleAlgorithms;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+import simpleAlgorithms.binTreeLeafs.BinTree;
+import simpleAlgorithms.binTreeLeafs.SomeDataHolder;
 
-import simpleAlgorithms.binTree.BinTree;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-public class BinTreeTest {
+import static junit.framework.TestCase.assertTrue;
+import static simpleAlgorithms.binTreeLeafs.BinTree.balancedLeafTree;
+
+public class BinTreeLeafsTest {
     private static Random random = new Random(47);
     private static final int SIZE = 20;
     private static final int BOUND = 100;
@@ -53,7 +54,7 @@ public class BinTreeTest {
 
     }
 
-    public BinTreeTest(){
+    public BinTreeLeafsTest(){
         System.setOut(newOut);
     }
 
@@ -71,65 +72,20 @@ public class BinTreeTest {
 
     @Test
     public void initialTest(){
-        BinTree<Integer> binTree = new BinTree<>();
-        binTree.insert(1234);
-        binTree.insert(1233);
-        binTree.insert(1235);
-        binTree.insert(1232);
-        binTree.insert(1236);
-        binTree.insert(1230);
-        binTree.insert(1231);
-        binTree.insert(1227);
+        BinTree<SomeDataHolder> binTree = new BinTree<>();
+        for (int i = 0; i < SIZE; i++) {
+            binTree.insert(new SomeDataHolder(random.nextInt(100)));
+        }
 
-        binTree.displayTree();
-
-        binTree.delete(1230);
-        //binTree.delete(1227);
-
-        binTree.displayTree();
+        binTree.displayTree2();
     }
 
     @Test
-    public void elementInsertionTest(){
-        BinTree<Integer> binTree = new BinTree<>();
-        List<Integer> list = new ArrayList<>(SIZE);
-
-        for (int i = 0; i < SIZE; i++) {
-            int randInt = random.nextInt(BOUND);
-            binTree.insert(randInt);
-            list.add(randInt);
-        }
-
-        BinTreeTest testCase = run();
-
-        binTree.displayTree();
-
-        for (Integer integer : list) {
-            testCase.include(integer.toString());
-        }
+    public void leafTreeTest(){
+        String testStr = "QWERASDFZOP";
+        BinTree<String> leafTree = balancedLeafTree(testStr.split(""), "+");
+        leafTree.displayTree();
+        leafTree.displayTree2();
     }
 
-    @Test
-    public void elementDeletionTest(){
-        BinTree<Integer> binTree = new BinTree<>();
-        List<Integer> list = new ArrayList<>(SIZE);
-
-        for (int i = 0; i < SIZE; i++) {
-            int randInt = random.nextInt(BOUND);
-            binTree.insert(randInt);
-            list.add(randInt);
-        }
-
-        for (Integer integer : list) {
-            binTree.delete(integer);
-        }
-
-        BinTreeTest testCase = run();
-        binTree.displayTree();
-
-        for (Integer integer : list) {
-            testCase.exclude(integer.toString());
-        }
-
-    }
 }

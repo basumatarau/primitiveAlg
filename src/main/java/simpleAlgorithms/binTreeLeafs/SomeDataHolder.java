@@ -1,9 +1,9 @@
-package simpleAlgorithms.BinTree;
+package simpleAlgorithms.binTreeLeafs;
 
 public class SomeDataHolder implements Comparable<SomeDataHolder>{
     private int num;
 
-    SomeDataHolder(int n){
+    public SomeDataHolder(int n){
         this.num = n;
     }
 
@@ -14,5 +14,10 @@ public class SomeDataHolder implements Comparable<SomeDataHolder>{
     @Override
     public int compareTo(SomeDataHolder o) {
         return Integer.compare(num, o.num);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-2d", num);
     }
 }

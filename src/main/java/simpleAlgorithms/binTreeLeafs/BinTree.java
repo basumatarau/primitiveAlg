@@ -1,6 +1,6 @@
-package simpleAlgorithms.BinTree;
+package simpleAlgorithms.binTreeLeafs;
 
-import java.util.Objects;
+import java.util.*;
 
 public class BinTree<T extends Comparable<T>> {
     private Node<T> root;
@@ -42,7 +42,6 @@ public class BinTree<T extends Comparable<T>> {
                 current = current.getRight();
             }
         }
-
         return null;
     }
 
@@ -140,6 +139,130 @@ public class BinTree<T extends Comparable<T>> {
             walkAroundInOrder(node.getLeft(), offset);
             walkAroundInOrder(node.getRight(), offset);
 
+        }
+    }
+
+    public void displayTree2() {
+        int depth = treeDepth(root);
+        int width = (int) Math.pow(2, depth);
+
+        LinkedList<Node<T>> currentLevelNodes = new LinkedList<>();
+        currentLevelNodes.push(root);
+        boolean isNextLineEmpty = false;
+
+        while (!isNextLineEmpty){
+            isNextLineEmpty = true;
+            LinkedList<Node<T>> children = new LinkedList<>();
+            for (int i = 0; i < width/2; i++) {
+                System.out.print("-");
+            }
+
+            while(!currentLevelNodes.isEmpty()){
+                Node<T> tmp = currentLevelNodes.pop();
+                if (tmp != null){
+                    System.out.print(tmp.getData());
+                    children.push(tmp.getLeft());
+                    children.push(tmp.getRight());
+                    if (tmp.getLeft() != null || tmp.getRight() != null){
+                        isNextLineEmpty = false;
+                    }
+                }else{
+                    System.out.print("*");
+                    children.push(null);
+                    children.push(null);
+                }
+                for (int i = 0; i < width - 1; i++) {
+                    System.out.print("-");
+                }
+            }
+            System.out.println();
+            width /= 2;
+            while (!children.isEmpty()){
+                currentLevelNodes.push(children.pop());
+            }
+        }
+    }
+
+    private int treeDepth(Node<T> root){
+        if(root == null){
+            return 0;
+        } else{
+            int leftDepth = treeDepth(root.getLeft());
+            int rightDepth = treeDepth(root.getRight());
+            return leftDepth > rightDepth ? ++leftDepth : ++rightDepth;
+        }
+    }
+
+    public static <T extends Comparable<T>> BinTree<T> balancedLeafTree(T[] array, T junction){
+        Deque<BinTree<T>> forest = new LinkedList<>();
+
+        for (int i = 0; i < array.length; i++) {
+            BinTree<T> leaf = new BinTree<>();
+            leaf.insert(array[i]);
+            forest.add(leaf);
+        }
+
+        while(forest.size() > 1){
+            BinTree<T> subTreeOne = forest.removeLast();
+            BinTree<T> subTreeTwo = forest.removeLast();
+            BinTree<T> tree = new BinTree<>();
+
+            tree.insert(junction);
+            tree.root.setLeft(subTreeOne.root);
+            tree.root.setRight(subTreeTwo.root);
+
+            forest.push(tree);
+        }
+
+        return forest.remove();
+    }
+
+    public static <T extends Comparable<T>> BinTree<T> unbalancedLeafTree(T[] array, T junction){
+        Deque<BinTree<T>> forest = new LinkedList<>();
+
+        for (int i = 0; i < array.length; i++) {
+            BinTree<T> leaf = new BinTree<>();
+            leaf.insert(array[i]);
+            forest.add(leaf);
+        }
+
+        while(forest.size() > 1){
+            BinTree<T> subTreeOne = forest.remove();
+            BinTree<T> subTreeTwo = forest.remove();
+            BinTree<T> tree = new BinTree<>();
+
+            tree.insert(junction);
+            tree.root.setLeft(subTreeOne.root);
+            tree.root.setRight(subTreeTwo.root);
+
+            forest.push(tree);
+        }
+
+        return forest.remove();
+    }
+
+    private void insert(BinTree<T> subTree) {
+        Node<T> current = root;
+        if(current == null){
+            root = subTree.root;
+        }else{
+            while(true){
+                if(current.getData().compareTo(subTree.root.getData()) > 0){
+                    if(current.getLeft() == null){
+                        current.setLeft(subTree.root);
+                        return;
+                    }else {
+                        current = current.getLeft();
+                    }
+                }else {
+                    if (current.getRight() == null){
+                        current.setRight(subTree.root);
+                        return;
+                    }else{
+                        current = current.getRight();
+                    }
+                }
+            }
         }
     }
 }
