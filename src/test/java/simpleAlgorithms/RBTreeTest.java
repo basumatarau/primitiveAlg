@@ -14,7 +14,7 @@ import static junit.framework.TestCase.assertTrue;
 public class RBTreeTest {
 
     private static Random random = new Random(47);
-    private static final int SIZE = 20;
+    private static final int SIZE = (int) Math.pow(2, 10);
     private static final int BOUND = 100;
 
     private PrintStream newOut;
@@ -74,12 +74,13 @@ public class RBTreeTest {
         RBTree<String> rbTree = new RBTree<>();
 
         BinTreeTest testCase = run();
-        String testString = "ABCD";
-        for (String s : testString.split("")) {
-            rbTree.insert(s);
+        for (int i = 0; i < SIZE; i++) {
+            rbTree.insert("A");
         }
 
-        rbTree.displayTree();
+        assertTrue("Red-black tree height is too high",
+                rbTree.getDepth() <= 2*(Math.log(SIZE+1)/Math.log(2)));
+
     }
 
 }
