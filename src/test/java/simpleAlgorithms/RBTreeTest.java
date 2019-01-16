@@ -1,9 +1,7 @@
 package simpleAlgorithms;
 
 import org.junit.Test;
-import simpleAlgorithms.binTreeLeafs.BinTree;
-import simpleAlgorithms.binTreeLeafs.SomeDataHolder;
-import simpleAlgorithms.binTreeSeqFill.BinTreeSeqFill;
+import simpleAlgorithms.RBTree.RBTree;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -12,9 +10,9 @@ import java.io.StringWriter;
 import java.util.Random;
 
 import static junit.framework.TestCase.assertTrue;
-import static simpleAlgorithms.binTreeLeafs.BinTree.balancedLeafTree;
 
-public class BinTreeLeafsTest {
+public class RBTreeTest {
+
     private static Random random = new Random(47);
     private static final int SIZE = 20;
     private static final int BOUND = 100;
@@ -55,7 +53,7 @@ public class BinTreeLeafsTest {
 
     }
 
-    public BinTreeLeafsTest(){
+    public RBTreeTest(){
         System.setOut(newOut);
     }
 
@@ -72,30 +70,16 @@ public class BinTreeLeafsTest {
     }
 
     @Test
-    public void initialTest(){
-        BinTree<SomeDataHolder> binTree = new BinTree<>();
-        for (int i = 0; i < SIZE; i++) {
-            binTree.insert(new SomeDataHolder(random.nextInt(100)));
+    public void insertionTest(){
+        RBTree<String> rbTree = new RBTree<>();
+
+        BinTreeTest testCase = run();
+        String testString = "ABCD";
+        for (String s : testString.split("")) {
+            rbTree.insert(s);
         }
 
-        binTree.displayTree2();
-    }
-
-    @Test
-    public void leafTreeTest(){
-        String testStr = "QWERASDFZOP";
-        BinTree<String> leafTree = balancedLeafTree(testStr.split(""), "+");
-        leafTree.displayTree();
-        leafTree.displayTree2();
-    }
-
-    @Test
-    public void binTreeSeqFill(){
-        String testString = "ABCDEFGHXYZ";
-        BinTreeSeqFill<String> tree = new BinTreeSeqFill<>();
-        tree.seqFill(testString.split(""));
-
-        tree.displayTree2();
+        rbTree.displayTree();
     }
 
 }
