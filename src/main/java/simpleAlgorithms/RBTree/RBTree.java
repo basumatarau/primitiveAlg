@@ -51,7 +51,8 @@ public class RBTree<T extends Comparable<T>> {
                 }
             } else {
                 if (current.getRight() != null) {
-                    if (!current.isRed && current.getRight().isRed && current.getLeft() != null) {
+                    if (!current.isRed && current.getRight().isRed &&
+                            current.getLeft() != null && current.getLeft().isRed) {
                         flip(current);
                     } else if (current.isRed && current.getRight().isRed) {
                         if (Objects.equals(current, parent.getRight())) {
@@ -136,7 +137,7 @@ public class RBTree<T extends Comparable<T>> {
     }
 
     private void rotateLeftRight(Node<T> current, Node<T> parent, Node<T> grandParent) {
-        current.getRight().isRed = !current.getRight().isRed;
+        current.getLeft().isRed = !current.getLeft().isRed;
         parent.isRed = !parent.isRed;
 
         parent.setRight(current.getLeft());
@@ -210,5 +211,9 @@ public class RBTree<T extends Comparable<T>> {
             int rightDepth = treeDepth(root.getRight());
             return leftDepth > rightDepth ? ++leftDepth : ++rightDepth;
         }
+    }
+
+    public int getDepth(){
+        return treeDepth(root);
     }
 }
