@@ -1,9 +1,9 @@
-package simpleAlgorithms.RBTree;
+package simpleAlgorithms.RedBlackTree;
 
 import java.util.LinkedList;
 import java.util.Objects;
 
-public class RBTree<T extends Comparable<T>> {
+public class RedBlackTree<T extends Comparable<T>> {
     private Node<T> root;
 
     public void insert(T data) {
@@ -18,7 +18,6 @@ public class RBTree<T extends Comparable<T>> {
         Node<T> parent = root;
         Node<T> current = root;
 
-        //todo something doesn't work...
         while (current != null) {
             if (data.compareTo(current.getData()) < 0) {
                 if (current.getLeft() != null) {

@@ -1,4 +1,4 @@
-package simpleAlgorithms.RBTree;
+package simpleAlgorithms.RedBlackTree;
 
 class Node<T extends Comparable<T>> {
     private Node<T> left = null;
