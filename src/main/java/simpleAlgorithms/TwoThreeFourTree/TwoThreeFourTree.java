@@ -5,13 +5,13 @@ import java.util.Arrays;
 public class TwoThreeFourTree <T extends Comparable<T>>{
 
     class Node<TYPE extends Comparable<TYPE>> {
-        private static final int ORDER = 4;
+        private static final int ORDER = 3;
 
         private int itemsNum = 0;
         @SuppressWarnings("unchecked")
-        private TYPE[] items = (TYPE[]) new Comparable[ORDER - 1];
+        private TYPE[] items = (TYPE[]) new Comparable[ORDER];
         @SuppressWarnings("unchecked")
-        private Node<TYPE>[] children = new Node[ORDER];
+        private Node<TYPE>[] children = new Node[ORDER + 1];
 
         public Node(TYPE data){
             items[0] = data;
@@ -27,7 +27,7 @@ public class TwoThreeFourTree <T extends Comparable<T>>{
         }
 
         public boolean isFull() {
-            return itemsNum == ORDER - 1;
+            return itemsNum == ORDER;
         }
 
         public boolean isLeaf() {
@@ -114,8 +114,8 @@ public class TwoThreeFourTree <T extends Comparable<T>>{
                     Node<T> newNode = new Node<>(current.removeItem());
                     Node<T> newRoot = new Node<>(current.removeItem());
 
-                    Node<T> rightNode = current.disconnectChild(Node.ORDER - 1);
-                    Node<T> leftNode = current.disconnectChild(Node.ORDER - 2);
+                    Node<T> rightNode = current.disconnectChild(Node.ORDER);
+                    Node<T> leftNode = current.disconnectChild(Node.ORDER - 1);
 
                     newNode.connectChild(0, leftNode);
                     newNode.connectChild(1, rightNode);
@@ -127,8 +127,8 @@ public class TwoThreeFourTree <T extends Comparable<T>>{
                     Node<T> newNode = new Node<>(current.removeItem());
                     parent.insertItem(current.removeItem());
                     parent.connectChild(parent.getItemsNum(), newNode);
-                    Node<T> rightNode = current.disconnectChild(Node.ORDER - 1);
-                    Node<T> leftNode = current.disconnectChild(Node.ORDER - 2);
+                    Node<T> rightNode = current.disconnectChild(Node.ORDER);
+                    Node<T> leftNode = current.disconnectChild(Node.ORDER - 1);
                     newNode.connectChild(0, leftNode);
                     newNode.connectChild(1, rightNode);
                 }

@@ -82,8 +82,11 @@ public class TwoThreeFourTreeTest {
         }
 
         System.out.println(tree.treeDepth());
+
+
         assertTrue("234-Tree height is too high",
                 tree.treeDepth() * 2 < 2 * (Math.log(SIZE + 1) / Math.log(2)));
+
     }
 
 }
